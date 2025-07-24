@@ -38,6 +38,9 @@ class Settings(BaseSettings):
     workflow_step_timeout: int = int(os.getenv("WORKFLOW_STEP_TIMEOUT", "60"))
     workflow_posting_timeout: int = int(os.getenv("WORKFLOW_POSTING_TIMEOUT", "1200"))  # 20 minutes for posting
     workflow_enable_auto_posting: bool = os.getenv("WORKFLOW_ENABLE_AUTO_POSTING", "true").lower() == "true"
+    workflow_demo_mode: bool = os.getenv("WORKFLOW_DEMO_MODE", "false").lower() == "true"
+    workflow_source_accounts: str = os.getenv("WORKFLOW_SOURCE_ACCOUNTS", "jack98tom")  # Comma-separated list
+    workflow_min_delay_between_posts: int = int(os.getenv("WORKFLOW_MIN_DELAY_BETWEEN_POSTS", "300"))  # 5 minutes
 
     # Directories
     data_dir: str = "./data"

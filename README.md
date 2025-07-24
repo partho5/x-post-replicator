@@ -215,7 +215,10 @@ WORKFLOW_DEFAULT_COUNT=1
 WORKFLOW_STEP_TIMEOUT=60
 WORKFLOW_POSTING_TIMEOUT=1200
 WORKFLOW_ENABLE_AUTO_POSTING=true
+WORKFLOW_DEMO_MODE=false
 ```
+
+**Demo Mode**: Set `WORKFLOW_DEMO_MODE=true` to use fake tweets for testing without hitting Twitter's API rate limits. When enabled, the workflow creates demo tweets instead of fetching real content.
 
 ## Architecture
 

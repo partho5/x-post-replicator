@@ -83,16 +83,36 @@ class TweetPoster:
             # Get recent tweets from authenticated user
             recent_tweets = self.client.get_users_tweets(
                 id=self.client.get_me().data.id,
-                max_results=10
+                max_results=20  # Check more recent tweets
             )
 
             if not recent_tweets.data:
                 return False
 
-            # Simple duplicate check - could be enhanced with fuzzy matching
+            # Enhanced duplicate check with multiple criteria
+            text_lower = text.lower()
+            text_words = set(text_lower.split())
+            
             for tweet in recent_tweets.data:
-                if text.lower() in tweet.text.lower() or tweet.text.lower() in text.lower():
-                    logger.warning(f"Potential duplicate content detected")
+                tweet_text_lower = tweet.text.lower()
+                tweet_words = set(tweet_text_lower.split())
+                
+                # Check for exact or near-exact matches
+                if text_lower == tweet_text_lower:
+                    logger.warning(f"Exact duplicate content detected")
+                    return True
+                
+                # Check for high similarity (more than 70% same words)
+                common_words = text_words.intersection(tweet_words)
+                if len(common_words) > 0:
+                    similarity = len(common_words) / max(len(text_words), len(tweet_words))
+                    if similarity > 0.7:
+                        logger.warning(f"High similarity content detected ({similarity:.2%})")
+                        return True
+                
+                # Check for substring matches (for longer content)
+                if len(text) > 50 and (text_lower in tweet_text_lower or tweet_text_lower in text_lower):
+                    logger.warning(f"Substring duplicate content detected")
                     return True
 
             return False

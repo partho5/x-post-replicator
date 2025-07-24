@@ -49,28 +49,36 @@ class ContentPolisher:
     def _create_polish_prompt(self, text: str, tweet_type: int) -> str:
         """Create appropriate prompt based on tweet type"""
         type_instructions = {
-            1: "Make this general tweet more engaging and relatable",
-            2: "Polish this promotional tweet to be more compelling while maintaining professionalism",
-            3: "Improve this news tweet to be more informative and attention-grabbing",
-            4: "Polish this personal tweet to be more authentic and engaging",
-            5: "This is a retweet - just clean up the language if needed",
-            6: "This is part of a thread - make it more coherent and engaging"
+            1: "Transform this general tweet into a unique, engaging perspective while keeping the core message",
+            2: "Rewrite this promotional content with fresh language and unique angles while maintaining professionalism",
+            3: "Rephrase this news tweet with original insights and unique perspective while keeping it informative",
+            4: "Reimagine this personal tweet with authentic, unique expression while maintaining the personal touch",
+            5: "This is a retweet - create a unique commentary or perspective on the original content",
+            6: "This is part of a thread - make it more coherent and engaging with unique insights"
         }
 
-        instruction = type_instructions.get(tweet_type, "Polish this tweet to be more engaging")
+        instruction = type_instructions.get(tweet_type, "Transform this tweet into unique, engaging content")
 
         prompt = f"""
         {instruction}.
 
         Original tweet: "{text}"
 
+        IMPORTANT: Create a COMPLETELY UNIQUE version that:
+        - Has different wording and structure from the original
+        - Uses fresh perspectives and unique angles
+        - Avoids any direct copying or similar phrasing
+        - Maintains the core message but expresses it differently
+        - Uses original insights and commentary
+
         Rules:
         - Keep it under 280 characters
-        - Maintain the original meaning and tone
-        - Make it more engaging and readable
+        - Make it significantly different from the original
+        - Use unique language and structure
         - Don't use any hashtags in the tweet
         - Don't change any URLs or mentions
         - Support Unicode characters (emojis, international text)
+        - Add your own unique perspective or commentary
 
         Return only the polished tweet text, nothing else.
         """
