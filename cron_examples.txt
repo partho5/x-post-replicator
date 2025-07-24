@@ -1,0 +1,39 @@
+# Cron Job Examples for Twitter Workflow
+
+# Run every hour
+0 * * * * cd /path/to/your/project && /path/to/your/venv/bin/python workflow_runner.py
+
+# Run every 30 minutes
+*/30 * * * * cd /path/to/your/project && /path/to/your/venv/bin/python workflow_runner.py
+
+# Run every 15 minutes
+*/15 * * * * cd /path/to/your/project && /path/to/your/venv/bin/python workflow_runner.py
+
+# Run every day at 9 AM
+0 9 * * * cd /path/to/your/project && /path/to/your/venv/bin/python workflow_runner.py
+
+# Run every day at 9 AM and 6 PM
+0 9,18 * * * cd /path/to/your/project && /path/to/your/venv/bin/python workflow_runner.py
+
+# Run with specific parameters
+# Username: example_user, Count: 5, Tweet Type: 2 (Promotional)
+0 * * * * cd /path/to/your/project && /path/to/your/venv/bin/python workflow_runner.py example_user 5 2
+
+# Run with custom username only
+0 * * * * cd /path/to/your/project && /path/to/your/venv/bin/python workflow_runner.py my_target_user
+
+# Run with custom count only (uses default username)
+0 * * * * cd /path/to/your/project && /path/to/your/venv/bin/python workflow_runner.py "" 3
+
+# Log output to file
+0 * * * * cd /path/to/your/project && /path/to/your/venv/bin/python workflow_runner.py >> /var/log/twitter-workflow.log 2>&1
+
+# To add a cron job, use:
+# crontab -e
+# Then add one of the lines above
+
+# To view current cron jobs:
+# crontab -l
+
+# To remove all cron jobs:
+# crontab -r 

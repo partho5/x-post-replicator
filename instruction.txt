@@ -1,0 +1,35 @@
+python -m venv venv
+source venv/Scripts/activate
+
+run the app
+------------
+python -m app.main
+
+
+workflow
+-----------
+👉 Download tweets from @x_handle
+
+POST http://127.0.0.1:8001/tweets/download
+with JSON
+{
+    "username": "great_martis",
+    "count": 10
+}
+
+👉 Get all the tweets that were downloaded and currently saved in local database
+GET http://127.0.0.1:8001/tweets/user/{x_handle}
+response in array of JSON
+
+👉 Get particular tweet from that JSON, and take the first object's tweet_id
+GET http://127.0.0.1:8001/tweets/{tweet_id}
+response in JSON
+
+👉 Rephrase that tweet
+POST http://127.0.0.1:8001/tweets/{tweet_id}}/polish
+response in JSON
+
+👉 Publish the latest polished tweet collected from @x_handle
+POST http://127.0.0.1:8001/tweets/publish-latest/{x_handle}
+
+

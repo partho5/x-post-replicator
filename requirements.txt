@@ -1,0 +1,16 @@
+# requirements.txt
+
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+sqlalchemy==2.0.23
+aiosqlite==0.19.0
+pydantic~=2.11.7
+pydantic-settings
+python-multipart
+python-dotenv==1.0.0
+httpx==0.25.2
+aiofiles==23.2.1
+openai~=1.93.0
+tweepy==4.14.0
+pillow
+requests~=2.32.4

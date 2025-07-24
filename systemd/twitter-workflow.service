@@ -1,0 +1,15 @@
+[Unit]
+Description=Twitter Workflow Automation Service
+After=network.target
+
+[Service]
+Type=oneshot
+User=your-username
+WorkingDirectory=/path/to/your/project
+Environment=PATH=/path/to/your/venv/bin
+ExecStart=/path/to/your/venv/bin/python workflow_runner.py
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target 
