@@ -79,6 +79,9 @@ This application uses a **two-account architecture**:
 1. Start the application:
 ```
 uvicorn app.main:app --reload
+# or
+python -m app.main
+
 ```
 
 2. Access the API documentation at `http://localhost:8000/docs`
